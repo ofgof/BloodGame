@@ -123,9 +123,9 @@
 
     </script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script defer src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
     
     <script>
       window.onload = function(){
@@ -148,6 +148,8 @@
           appId: "1:46144072308:web:d501040122245d5c58ff21",
           measurementId: "G-8MEXEX7PDG"
         };
+
+        console.log(firebase);
     
         // Initialize Firebase
         window.firebase = firebase.initializeApp(firebaseConfig);
