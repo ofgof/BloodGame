@@ -33,6 +33,11 @@
       var warningBanner = document.querySelector("#unity-warning");
 
       var firebase;
+      var auth;
+      var SignInWithRedirect;
+      var GetRedirectResult;
+      var GoogleAuthProvider;
+
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
@@ -123,11 +128,14 @@
 
     </script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js"></script>
     
-    <script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+      import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
       window.onload = function(){
         // Import the functions you need from the SDKs you need
         // import { initializeApp } from "firebase/app";
@@ -149,16 +157,31 @@
           measurementId: "G-8MEXEX7PDG"
         };
 
-        console.log(firebase);
-    
         // Initialize Firebase
-        window.firebase = firebase.initializeApp(firebaseConfig);
+        window.firebase = initializeApp(firebaseConfig);
+        console.log(firebase);
 
         // Optional: Initialize Firebase Analytics
-        firebase.analytics();
+        //getAnalytics(firebase);
 
         // Firebase Auth can now be used
-        var auth = firebase.auth();
+        window.auth = getAuth(firebase);
+        console.log("auth = " + auth);
+
+        window.SignInWithRedirect = signInWithRedirect;
+        console.log("signInWithRedirect = " + SignInWithRedirect);
+        window.GetRedirectResult = getRedirectResult;
+        console.log("getRedirectResult = " + GetRedirectResult);
+        window.GoogleAuthProvider = new GoogleAuthProvider();
+        window.GoogleAuthProvider.addScope('https://www.googleapis.com/auth/plus.login');
+        console.log("GoogleAuthProvider = " + GoogleAuthProvider);
+
+        if (auth.credential) {
+            // This gives you a Google Access Token
+            const token = result.credential.accessToken;
+            const user = result.user;
+            console.log("Success: already signed in with Google!");
+        }
       }
       </script>
   </body>
